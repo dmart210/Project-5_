@@ -99,15 +99,15 @@ void Post::updateTimeStamp() {
     time_stamp_ = time(0);
 }
 
-bool Post::operator<(Post* post_){
-    int this_len = this->getUsername().size();
-    int post_len = post_->getUsername().size();
-    return this_len < post_len;
+bool Post::operator<(const Post& post_)const{
+    std::string this_len = this->getUsername();
+    std::string post_len = post_.getUsername();
+    return this_len < post_len; // change to one line
 }
 
-bool Post::operator>(Post* post_){
-    int this_len = this->getUsername().size();
-    int post_len = post_->getUsername().size();
-    return this_len > post_len;
+bool Post::operator>(const Post& post_) const{
+    std::string this_len = this->getUsername();
+    std::string post_len = post_.getUsername();
+    return this_len > post_len;// change to one line
     return false;
 }

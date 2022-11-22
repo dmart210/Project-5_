@@ -275,72 +275,36 @@ int LinkedList<ItemType>::getIndexOf(const ItemType &item) const {
 }
 
 
-template<typename ItemType>
-std::vector<ItemType> LinkedList<ItemType>::listToVec() {
-    std::vector<ItemType> vec_;
-    Node<ItemType>* iterator = getHeadPtr();
-    while (iterator != nullptr){
-        vec_.push_back(iterator->getItem());
-        iterator = iterator->getNext();
-    }
-    return vec_;
-}
 
 template<typename ItemType>
-LinkedList<ItemType> LinkedList<ItemType>::vecToList(std::vector<ItemType>& vec_) {
-    LinkedList<ItemType> sortedList;
-    for (unsigned int i = vec_.size(); i > 0; i--){
-        sortedList.insert(vec_[i],0);
-    }
-    return sortedList;
+void LinkedList<ItemType>::swap(Node<ItemType>* node1, Node<ItemType>* node2) {
+    ItemType temp = node2->getItem();
+    node2->setItem(node1->getItem());
+    node1->setItem(temp);
 }
+
+
 template<typename ItemType>
-LinkedList<ItemType> LinkedList<ItemType>::bubbleSortGreatToLess() {
-    std::vector<ItemType> vec_ = listToVec();
-    int size = vec_.size();
+template<typename Comparator>
+void LinkedList<ItemType>::bubbleSort(Comparator comp, int* swap_counter) {
+    int size = getSize();
     bool swapped = true;
-    int pass = 0;
+    int pass = 1;
     while (swapped && (pass < size)){
         swapped = false;
-        for(int i = 0; i < size - pass; i++){
-            if (vec_[i] < vec_[i + 1]){
-                std::swap(vec_[i], vec_[i + 1]);
-                swapp++;
+        Node<ItemType>* iterator = getHeadPtr();
+        while (iterator->getNext()!= nullptr){
+            if (comp(*iterator->getNext()->getItem(), *iterator->getItem())){
+                swap(iterator,iterator->getNext());
+                (*swap_counter)++;
                 swapped = true;
             }
+            iterator = iterator->getNext();
         }
         pass++;
     }
-    std::vector<ItemType> new_vec;
-    for (int i = 0; i < vec_.size() + 1; i++){
-        new_vec.push_back(vec_[i]);
-    }
-    new_vec.pop_back();
-    LinkedList<ItemType> sortedList = vecToList(new_vec);
-    return sortedList;
-
 }
 
-template<typename ItemType>
-LinkedList<ItemType> LinkedList<ItemType>::bubbleSortLessToGreat() {
-    std::vector<ItemType> vec_ = listToVec();
-    int size = vec_.size();
-    bool swapped = true;
-    int pass = 0;
-    while (swapped && (pass < size)){
-        swapped = false;
-        for(int i = 0; i < size-pass; i++){
-            if (vec_[i] > vec_[i + 1]){
-                std::swap(vec_[i], vec_[i + 1]);
-                swapp++;
-                swapped = true;
-            }
-        }
-        pass++;
-    }
-    LinkedList<ItemType> sortedList = vecToList(vec_);
-    return sortedList;
-}
 
 template<typename ItemType>
 void LinkedList<ItemType>::printList() {
@@ -351,9 +315,7 @@ void LinkedList<ItemType>::printList() {
     }
 }
 
-template<typename ItemType>
-int LinkedList<ItemType>::getSwaps() {
-    return swapp;
-}
 
 
+
+//swapping the Post* instead of the actual nodes

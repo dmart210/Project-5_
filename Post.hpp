@@ -79,8 +79,8 @@ public:
 
 
     void virtual displayPost() = 0;
-    bool operator <(Post* post_);
-    bool operator >(Post* post_);
+    bool operator <(const Post& post_)const;
+    bool operator >(const Post& post_)const ;
 
 private:
     std::string post_title_;

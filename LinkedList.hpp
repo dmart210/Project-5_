@@ -93,12 +93,12 @@ class LinkedList {
                                   LinkedList but in reverse order
         */
         void reverseCopy(const LinkedList<ItemType> &a_list);
-        LinkedList<ItemType> bubbleSortLessToGreat();
-        LinkedList<ItemType> bubbleSortGreatToLess();
+
+        template<typename Comparator>
+        void bubbleSort(Comparator comp, int* swap_counter);
         void printList();
-        std::vector<ItemType> listToVec();
-        LinkedList<ItemType> vecToList(std::vector<ItemType>& vec_);
-        int getSwaps();
+        void swap (Node<ItemType>* item1, Node<ItemType>* item2);
+
 
 
     private:

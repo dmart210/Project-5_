@@ -142,6 +142,7 @@ public:
     */
     void printFeed();
 
+    LinkedList<Post*> getFeed();
 
 
 

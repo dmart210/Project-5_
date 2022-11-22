@@ -173,7 +173,18 @@ void Network<ItemType>::printFeedForAccount(ItemType &an_entry) {
     }
 }
 
-
+template<typename ItemType>
+LinkedList<Post*> Network<ItemType>::getFeed() {
+    LinkedList<Post*> new_List;
+    Node<Post*>* iterator = feed_.getHeadPtr();
+    while (iterator != nullptr){
+        for (int i = feed_.getSize(); i > 0; i--) {
+            new_List.insert(iterator->getItem(), i);
+            iterator = iterator->getNext();
+        }
+    }
+    return new_List;
+}
 template <typename ItemType>
 int Network<ItemType>::getIndexOf(const std::string username) const {
     bool found = false;
@@ -227,8 +238,8 @@ bool Network<ItemType>::authenticateFollow(ItemType &an_entry, const std::string
 */
 template <typename ItemType>
 void Network<ItemType>::addToFeed(Post* p) {
-    if(getIndexOf(p->getUsername()) > -1)
-        feed_.insert(p, 0);
+//    if(getIndexOf(p->getUsername()) > -1)
+    feed_.insert(p, 0);
 }
 
 
@@ -332,8 +343,9 @@ template <typename ItemType>
 void Network<ItemType>::printFeed(){
     Node<Post*> *header = feed_.getHeadPtr();
 
+
     while(header != nullptr) {
-        std::cout << header->getItem() << '\n';
+        header->getItem()->displayPost();
         header = header->getNext();
     }
 }
@@ -341,22 +353,8 @@ void Network<ItemType>::printFeed(){
 template<typename ItemType>
 template<typename Comparator>
 LinkedList<Post*> Network<ItemType>::bSortByUsername(Comparator comp, int *swap_counter) {
-
-    LinkedList<Post*> sortListLeastToGreatest = feed_;
-    LinkedList<Post*> sortListGreatestToLeast = feed_;
-    Post* temp_ptr = nullptr;
-    Post* temp_ptr2 = nullptr;
-    Node<Post*>* ptr = feed_.getHeadPtr();
-    if (comp(ptr->getItem(),ptr->getNext()->getItem())){
-        sortListLeastToGreatest= sortListLeastToGreatest.bubbleSortLessToGreat();
-        int swaps = sortListLeastToGreatest.getSwaps();
-        swap_counter = &swaps;
-        return sortListLeastToGreatest;
-    }
-    else{
-        sortListGreatestToLeast = sortListGreatestToLeast.bubbleSortGreatToLess();
-        int swaps = sortListGreatestToLeast.getSwaps();
-        swap_counter = &swaps;
-        return sortListGreatestToLeast;
-    }
+    LinkedList<Post*> new_list = feed_;
+    new_list.bubbleSort(comp, swap_counter);
+//    new_list.printList();
+    return new_list;
 }
