@@ -166,6 +166,16 @@ public:
     */
     int removeIfContains(const std::string &postBody);
 
+   /**
+    * 
+    * @param: Comparator that will either be std::less<Post*>{} or std::greater<Post*>{}
+    * @param: Integer pointer than refers to the amoount of times swap has occurred
+    * @pre: comp must be either std::less<Post*>{} or std::greater<Post*>{} since we can't pass < and > as a paramter 
+    * @post: In this method we create a new LinkedList we call new_list which is going to be equal to feed. After we initialize new_list,
+    *        we call the bubbleSort function, with the correct comparator and correct integer pointer,  which will sort the username is alphabetical order. 
+    * @return: we retun the sorted list that was sorted using bubbleSort.
+    */
+
     template<typename Comparator>
     LinkedList<Post*> bSortByUsername(Comparator comp, int* swap_counter);
 

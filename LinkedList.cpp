@@ -275,7 +275,19 @@ int LinkedList<ItemType>::getIndexOf(const ItemType &item) const {
 }
 
 
-
+/**
+ * @pre: Node 1 and Node 2 should be present in the LinkedList, but doesn't have to be since we are traversing through any LinkedList
+ * @post: This method will get Two nodes [node1 and node 2], and with these nodes we will swap the item inside them.
+ *        To do this, set a brand new ItemType (which will be = Post*), set the right most nodes item or Node2's item to Node1's item, and then
+ *        set the first nodes item (node 1) to the temp which is node2's item. 
+ *        EX:
+ *        node1 = post_ptr1
+ *        node2 = post_ptr2
+ *        swap(node1, node2)
+ *        node1 = post_ptr2
+ *        node2 = post_ptr1
+ * 
+ */
 template<typename ItemType>
 void LinkedList<ItemType>::swap(Node<ItemType>* node1, Node<ItemType>* node2) {
     ItemType temp = node2->getItem();
@@ -283,6 +295,16 @@ void LinkedList<ItemType>::swap(Node<ItemType>* node1, Node<ItemType>* node2) {
     node1->setItem(temp);
 }
 
+/**
+ * 
+ * @pre: Comp must be a valid Comparator of either [std::less<Post>{} or std::greater<Post>{}]
+ * @@post: This method will go through the feed_ LinkedList and using bubble sort, we will sort from either least to greatest,
+ *         or from greatest to least, all depending on the comparator given. 
+ * @note: The way bubble sort works is we're going to iterate throughout the LinkedList and see if the current Nodes username is greater than/less
+ *        than the following Nodes usernames. If it is, then we are going to swap those two Post objects. And after we swap them, we increment
+ *        the swap_counter.
+ * 
+ */
 
 template<typename ItemType>
 template<typename Comparator>
@@ -305,7 +327,10 @@ void LinkedList<ItemType>::bubbleSort(Comparator comp, int* swap_counter) {
     }
 }
 
-
+/**
+ * 
+ * @post: This method will simply traverse through the LinkedList, get the item, and displayPost of the Post* it obtains. 
+ */
 template<typename ItemType>
 void LinkedList<ItemType>::printList() {
     Node<ItemType>* iterator = getHeadPtr();

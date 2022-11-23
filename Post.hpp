@@ -79,7 +79,18 @@ public:
 
 
     void virtual displayPost() = 0;
+    /**
+    * 
+    * @note: operator that compares the the usernames of two post objects and sees if the left Post is less than the right post
+    * @return: returns true if the Post on the left side is less than  (first in the alpha bet) than the Post on the right side.
+    */
     bool operator <(const Post& post_)const;
+
+    /**
+    * 
+    * @note: operator that compares the the usernames of two post objects and sees if the left post is greater than the right post. 
+    * @return: returns true if the Post on the left side is greater (farther in the alphabet) than the Post on the right side.
+    */
     bool operator >(const Post& post_)const ;
 
 private:
