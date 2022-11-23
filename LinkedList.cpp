@@ -303,6 +303,10 @@ void LinkedList<ItemType>::swap(Node<ItemType>* node1, Node<ItemType>* node2) {
  * @note: The way bubble sort works is we're going to iterate throughout the LinkedList and see if the current Nodes username is greater than/less
  *        than the following Nodes usernames. If it is, then we are going to swap those two Post objects. And after we swap them, we increment
  *        the swap_counter.
+ *        EX:
+ *        List= [1,4,2,5,3,6]
+ *        pass1 = [1,2,4,3,5,6]
+ *        pass2 = [1,2,3,4,5,6]->Done
  * 
  */
 
